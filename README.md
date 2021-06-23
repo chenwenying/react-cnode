@@ -1,2 +1,2 @@
 # react-cnode
-webpack+ssr+react+mobx+pm2
+webpack+react全栈工程架构
