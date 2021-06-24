@@ -1,43 +1,26 @@
 const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const { merge } = require('webpack-merge')
+const baseConfig = require('./webpack.base')
 
 const isDev = process.env.NODE_ENV === 'development'
 
-const config = {
+const config = merge(baseConfig, {
   mode: 'development',
   entry: {
     app: path.join(__dirname, '../client/app.js')
   },
   output: {
     filename: '[name].[hash].js',
-    path: path.join(__dirname, '../dist'),
-    publicPath: '/public/'
   },
   devtool: "eval-cheap-source-map",
-  module: {
-    rules: [
-      {
-        enforce: 'pre',
-        test: /.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader'
-      },
-      {
-        test: /.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
-  },
   plugins: [
     new HTMLPlugin({
       template: path.join(__dirname, '../client/template.html')
     })
   ]
-}
+})
 
 if(isDev) {
   config.entry = {
