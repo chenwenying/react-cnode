@@ -15,6 +15,11 @@
   },
   "author": "",
   "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo \"[Husky] pre-commit\""
+    }
+  },
   "dependencies": {
     "@babel/eslint-parser": "^7.14.7",
     "axios": "^0.21.1",
