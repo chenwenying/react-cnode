@@ -2,7 +2,7 @@ const axios = require('axios')
 const webpack = require('webpack')
 const path = require('path')
 const MemoryFS = require('memory-fs')
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware')
 const ReactDomServer = require('react-dom/server')
 
 const serverConfig = require('../../build/webpack.config.server')
@@ -23,7 +23,7 @@ const mfs = new MemoryFS()
 const serverComplier = webpack(serverConfig)
 serverComplier.outputFileSystem = mfs
 serverComplier.watch({}, (err, stats) => {
-  if(err) throw err
+  if (err) throw err
   stats = stats.toJson()
   stats.errors.forEach(err => console.log(err))
   stats.warnings.forEach(warn => console.log(warn))
@@ -45,7 +45,7 @@ module.exports = function (app) {
     target: 'http://localhost:8888'
   }))
 
-  app.get('*', function(req, res) {
+  app.get('*', function (req, res) {
     getTemplate().then(template => {
       const content = ReactDomServer.renderToString(serverBundle)
       res.send(template.replace('<!-- app -->', content))
